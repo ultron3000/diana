@@ -37,6 +37,7 @@
   </style>
 </head>
 <body>
+  <h1>Sonic the Hedgehog 3 (2024)</h1>
   <video id="video" controls autoplay></video>
   <a href="index.html" class="back-button">⬅ Back to Collection</a>
 
@@ -48,8 +49,19 @@
       const hls = new Hls();
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
+
+      // Debugging: check HLS events
+      hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        console.log("HLS.js is working and the video is loaded.");
+      });
+
+      hls.on(Hls.Events.ERROR, function(event, data) {
+        console.error("HLS.js error", event, data);
+      });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
+    } else {
+      console.error("HLS.js is not supported and the browser can't play this stream natively.");
     }
   </script>
 </body>
