@@ -1,59 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sonic the Hedgehog Movies</title>
+  <meta charset="UTF-8">
+  <title>Citadel: Diana | Premium Streaming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --primary: #ffcc00;
+      --secondary: #1a1a1a;
+      --accent: #333333;
+      --text: #ffffff;
+      --text-secondary: #cccccc;
+    }
+    
     body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--secondary);
+      color: var(--text);
       margin: 0;
       padding: 0;
-      background: url('https://images4.alphacoders.com/120/1204030.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
-    h1 {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      font-size: 2.5em;
-      margin-top: 0;
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
     }
-    .container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
+    
+    .movie-card {
+      transition: all 0.3s ease;
+      transform-origin: center;
+      perspective: 1000px;
     }
-    a.button {
-      background-color: #00aaff;
-      color: white;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      text-decoration: none;
-      transition: background 0.3s ease;
+    
+    .movie-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 25px -5px rgba(255, 204, 0, 0.1), 0 10px 10px -5px rgba(255, 204, 0, 0.04);
     }
-    a.button:hover {
-      background-color: #0077cc;
+    
+    .movie-card:hover .play-icon {
+      opacity: 1;
+      transform: scale(1);
     }
+    
+    .play-icon {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.3s ease;
+    }
+    
+    .movie-poster {
+      transition: all 0.3s ease;
+    }
+    
+    .movie-card:hover .movie-poster {
+      filter: brightness(0.7);
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: var(--secondary);
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+      border-radius: 20px;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    
+    .filter-btn.active {
+      background-color: var(--primary);
+      color: var(--secondary);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
   </style>
 </head>
-<body>
-  <h1>Sonic the Hedgehog Movie Collection</h1>
-  <div class="container">
-    <a class="button" href="sonic-2020.html">🎬 Sonic the Hedgehog (2020)</a>
-    <a class="button" href="sonic-2022.html">🎬 Sonic the Hedgehog 2 (2022)</a>
-    <a class="button" href="sonic-2024.html">🎬 Sonic the Hedgehog 3 (2024)</a>
+<body class="gradient-bg min-h-screen">
+  <!-- Navigation Bar -->
+  <nav class="bg-black bg-opacity-90 backdrop-blur-md sticky top-0 z-50 border-b border-yellow-500 border-opacity-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <div class="h-8 w-8 rounded-full bg-yellow-500 flex items-center justify-center">
+              <i class="fas fa-crown text-black"></i>
+            </div>
+            <span class="ml-2 text-yellow-500 font-bold text-xl">CITADEL</span>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#" class="text-yellow-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+              <a href="#" class="text-gray-300 hover:text-yellow-500 px-3 py-2 rounded-md text-sm font-medium">Series</a>
+              <a href="#" class="text-gray-300 hover:text-yellow-500 px-3 py-2 rounded-md text-sm font-medium">Movies</a>
+              <a href="#" class="text-gray-300 hover:text-yellow-500 px-3 py-2 rounded-md text-sm font-medium">New & Popular</a>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-4 flex items-center md:ml-6">
+            <div class="relative mx-4">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+              </div>
+              <input type="text" class="search-input block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent sm:text-sm" placeholder="Search...">
+            </div>
+            <button class="p-1 rounded-full text-gray-400 hover:text-yellow-500 focus:outline-none">
+              <i class="fas fa-bell text-xl"></i>
+            </button>
+            <div class="ml-3 relative">
+              <div class="h-8 w-8 rounded-full bg-gray-600 flex items-center justify-center cursor-pointer">
+                <i class="fas fa-user text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden">
+          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-yellow-500 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 relative z-20">
+      <div class="md:w-1/2">
+        <h1 class="text-4xl md:text-6xl font-bold text-yellow-500 mb-4">Citadel: Diana</h1>
+        <p class="text-lg text-gray-300 mb-6">The thrilling first season of the global phenomenon. Follow Agent Diana as she navigates a world of espionage, betrayal, and high-stakes missions.</p>
+        <div class="flex space-x-4">
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg flex items-center transition duration-300">
+            <i class="fas fa-play mr-2"></i> Play All
+          </button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg flex items-center border border-gray-600 transition duration-300">
+            <i class="fas fa-info-circle mr-2"></i> More Info
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 relative z-20">
+    <!-- Season Selector -->
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold text-white">Season 1</h2>
+      <div class="flex space-x-2">
+        <button class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300">
+          <i class="fas fa-filter mr-2"></i> Filter
+        </button>
+        <button class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300">
+          <i class="fas fa-sort mr-2"></i> Sort
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Options -->
+    <div class="mb-8 bg-gray-900 p-4 rounded-lg">
+      <div class="flex flex-wrap gap-2">
+        <button class="filter-btn px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-yellow-500 hover:text-black transition duration-300 active">
+          All Episodes
+        </button>
+        <button class="filter-btn px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-yellow-500 hover:text-black transition duration-300">
+          Action
+        </button>
+        <button class="filter-btn px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-yellow-500 hover:text-black transition duration-300">
+          Drama
+        </button>
+        <button class="filter-btn px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-yellow-500 hover:text-black transition duration-300">
+          Suspense
+        </button>
+        <button class="filter-btn px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-yellow-500 hover:text-black transition duration-300">
+          Recently Added
+        </button>
+      </div>
+    </div>
+
+    <!-- Episodes Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="movies">
+      <!-- Episodes will be dynamically inserted here -->
+    </div>
+
+    <!-- Loading More Indicator -->
+    <div class="mt-12 flex justify-center">
+      <button class="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-yellow-500 hover:text-black transition duration-300 flex items-center">
+        <i class="fas fa-sync-alt mr-2"></i> Load More Episodes
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black bg-opacity-90 border-t border-gray-800 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-yellow-500 font-bold text-lg mb-4">CITADEL</h3>
+          <p class="text-gray-400 text-sm">Premium streaming service featuring exclusive original content from around the world.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-medium mb-4">Navigation</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">Home</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">TV Shows</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">Movies</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">New Releases</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-medium mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">Terms of Service</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">Privacy Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">Cookie Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-medium mb-4">Connect With Us</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300 text-xl"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300 text-xl"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300 text-xl"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300 text-xl"><i class="fab fa-youtube"></i></a>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-400 text-sm">Subscribe to our newsletter</p>
+            <div class="mt-2 flex">
+              <input type="email" placeholder="Your email" class="px-4 py-2 bg-gray-800 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full">
+              <button class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-r-lg">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-gray-800">
+        <p class="text-gray-500 text-sm text-center">© 2023 Citadel Streaming. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const movies = [
+      { 
+        title: "Split in Two", 
+        video: "https://macdn.hakunaymatata.com/resource/484b5cdc6162f3dddf89c52ee9480db3.mp4?Expires=1749345409&Signature=oSxqtU8s7B90tUq3ckf~~zm4rJd2L0uO5JzbciOSMz5xsqeEVdWXelqw5zQQpaqzzi-oWQ89GJPDJZmt6vecxUBbfLc0nwwjmZWK1Ng37c4HPaLmlP~ws2LyoQduOQh2zzNqq76ib-TBjSXvoonFAfilsJWQPdZbLvywHkeXsA8uEIvSG4WbtaN2HPY1w0WKuKfjjGpcit018TPUlE-6S4iDxhjYqOOqg2SR6ZC-m3NYD~8VrhZfHx2ME4Er45oDR661MNXVT~oNrsPM0~aDqK8wWsSIcE76cfyWm-tVzry2vjCpJkhVnoHkGWn0okwAtepP8SQrlkJ8ltfoI0taqg__&Key-Pair-Id=KMHN1LQ1HEUPL", 
+        image: "https://m.media-amazon.com/images/S/pv-target-images/f35e7523b74a0651d3ab54d56a63306d333f37c54793fbd5d372059d58a8c7ae._BR-6_AC_SX720_FMwebp_.jpg",
+        duration: "52 min",
+        rating: "4.8",
+        episode: "Episode 1"
+      },
+      { 
+        title: "War", 
+        video: "https://macdn.hakunaymatata.com/resource/ec511dc643c2df7148e5033d3c659fdd.mp4?Expires=1749343370&Signature=n9BUfRK76EGS8g5rJAty2vrPZiAQuKSKyw5mdk5nYb0OvSoWIPbwxZdGwh2k2CYIICcHBVNZcFomCIx3C14EoHgqrosXc44qXzsBNXEGl~Y6yk4qxIFNc5iwkeLHR6X7DdGmk~z1IsoYcxZRyh-XKSU4uDHhVoiRnaNxk7unIRm2DjJvHlz7R3QIZsFs4alC-wVwrBTKj~zyIJJ8mDZrYy0BOdyWxRbAIP9wJlktCIwN7FCRrDprbue0tDWnQvcoFeblAhqMfAAb33rac9T7GTcvz0ALw0guOiNPzxtVUQrHic51yrcKlkLEDZP9yF8zMRY9d9PRdpBtjthlxHj~Iw__&Key-Pair-Id=KMHN1LQ1HEUPL", 
+        image: "https://m.media-amazon.com/images/S/pv-target-images/661b6fe92fac351e7a4f0e0f524d45cb3d9100eab863f15e13f3f2aadc5e4d87._BR-6_AC_SX720_FMwebp_.jpg",
+        duration: "48 min",
+        rating: "4.7",
+        episode: "Episode 2"
+      },
+      { 
+        title: "Together", 
+        video: "https://macdn.hakunaymatata.com/resource/75b14f54dad67b6d280fb9a76f5284d9.mp4?Expires=1749345763&Signature=gh-YsJIswExrTbwWFsiOtpqGlsQ1geEItCsPbHfkuATFFsGGWlH6HDQmH43o9VqLX8HX0yG8Nq~giMCH-eJ5NeCkfZ0fdkVN-aHDODmPGkyLrxAlCcMRa7MQceWn4x3BNhrXNkkWhGfBzlpEQQmsfU24AIDZ9A34I9yKpDBiikARUHcRJU8oa5Nmtn0MoHkSYM5-A1vNbKTwuJjfmJosnT8AqLghuX-U0p6ihabiRyN8Cqli9B3o4DhhI5H7DEwO6NqvHSQmiqDScLa9W7xeNMhsuwo7ChRV-OiyIXg1lRqNkv-ejK91YpfEvMANx7e9RtA0C1ZNwt8qusfUJ4mjMw__&Key-Pair-Id=KMHN1LQ1HEUPL", 
+        image: "https://m.media-amazon.com/images/S/pv-target-images/d9281667f948b73a7ff860a38d78a008bf470138650e1ad9f79cd910d37b012d._BR-6_AC_SX720_FMwebp_.jpg",
+        duration: "55 min",
+        rating: "4.9",
+        episode: "Episode 3"
+      },
+      { 
+        title: "The Zanis", 
+        video: "https://macdn.hakunaymatata.com/resource/b783018abd925ed2fb77f5a386449bad.mp4?Expires=1749345817&Signature=koDKHL2fXsEB01oNl~vICyNNzo5Dijwp1ZYXk7~Zt0cA56P2vN2H9qtkqbfTobnKpQBhdP8uSqgYOEThr8mpWft0xUuan3kmwXcoBHFXvJBgKVUzT7tXeWgK3hL0BVSZQoVgUcfrVmvJGbc~Nz1XWN2qfAEigULTga4YEq2P-NKEpB~yD9mythkUmmL65sEt1DEV-f6QwT8b~VbLhYCstKMbsbpQqpi14MzNDc7fPqg5zNNTs2X9hd2aEZMp0vXemTBlU0z4DxPrMi--5L8E6d93NmorSJSeRrzD2Lfr4tbbKOLiGvg2~lXtbxnoKrQvEbIGMJGfCGFDoYiovCYdjw__&Key-Pair-Id=KMHN1LQ1HEUPL", 
+        image: "https://m.media-amazon.com/images/S/pv-target-images/678fe3e11e682b8c510e64bfb52e785ec87ee99bb89d6a957afb5e6fcfef4c6b._BR-6_AC_SX720_FMwebp_.jpg",
+        duration: "50 min",
+        rating: "4.6",
+        episode: "Episode 4"
+      },
+      { 
+        title: "Attack", 
+        video: "https://macdn.hakunaymatata.com/resource/473d72af2af61352724ceb92c981afb0.mp4?Expires=1749345853&Signature=EacpSrAAmhoHPoOv8-IHxcDdrQ0RM8CbJTM~s-Y2w4E3V4cSN7kYEiiGOw4ycK38paorzqo1puvK11mIvEwxts3epSDO5YCwZR9uCZZl-wO6YrOvn~0SwB~q~o2ueAJiVx~dKfIlqX6MM5O9F~AryK3mD9bDSF0VFCeGG-eF6DlxjkGj~Y5B6WL1-BxJG8boLcu4zoG5HDdrd1TvHTMOK2VOHgQ5iJ6QyMC0xNj1W9qO32s76O78PHucdHMDc8Ed--qUUBJSRsINlpXaMiEAG5P3PcUjppzK50WT40Yo8v~XvRQL20hRG~tNV0K2epVn9gyEGes4Xk8JW00CzkFnQQ__&Key-Pair-Id=KMHN1LQ1HEUPL", 
+        image: "https://m.media-amazon.com/images/S/pv-target-images/9c0364b8762bc47a208f40c4e5359801419a5c699c3b024d95c014a5023eefcf._BR-6_AC_SX720_FMwebp_.jpg",
+        duration: "49 min",
+        rating: "4.8",
+        episode: "Episode 5"
+      },
+      { 
+        title: "Jupiter", 
+        video: "https://macdn.hakunaymatata.com/resource/3bb9e33171866e49fb51f76203f1fab2.mp4?Expires=1749345912&Signature=kOsXmDHdQG11yUKyrmtAZbfgv77MeWek2eKRDE1iWRqXVJsk6Ldi77TEe137Uu4p2i-Ysi6bDNX7qkiy6PZWlDP4HmFIhM8Y-yJl1aqjNZkDr97v3K8HiBV6o4trIe5i41xIYFTQiWRg8wHk-R6M6b3UXPyskQqA7T11BunaMgDHD4RPO1y2r3cGa4W445F5XM-7ZZWhgRbITqNzVJQrUtZ9FOaNJVRgWMButz2bvarBHdlyJRIwnmmWh1ar6P5vB81DlT6vHTe897FV~q-XiBIx4UexqqxCHT5lziw~EvVciCeF2sjrsHiOuFUlNuSm6GHj8AZfKzYtxpH88wZJjQ__&Key-Pair-Id=KMHN1LQ1HEUPL", 
+        image: "https://m.media-amazon.com/images/S/pv-target-images/d930c0c27c1355a65f11e838d2e02c802f78c4b0feb61308d9ec12d8fffc0a5e._BR-6_AC_SX720_FMwebp_.jpg",
+        duration: "53 min",
+        rating: "4.9",
+        episode: "Episode 6"
+      },
+    ];
+
+    const container = document.getElementById('movies');
+    
+    movies.forEach((movie, index) => {
+      const delayClass = `delay-${(index % 5 + 1) * 100}`;
+      
+      const movieCard = document.createElement('div');
+      movieCard.className = `movie-card animate-fade-in ${delayClass}`;
+      movieCard.innerHTML = `
+        <div class="relative overflow-hidden rounded-xl shadow-lg h-full bg-gray-800 border border-gray-700 hover:border-yellow-500 transition duration-300">
+          <div class="relative">
+            <img src="${movie.image}" alt="${movie.title}" class="movie-poster w-full h-64 object-cover transition duration-300">
+            <div class="absolute inset-0 flex items-center justify-center play-icon">
+              <div class="bg-yellow-500 bg-opacity-90 rounded-full w-16 h-16 flex items-center justify-center transform transition duration-300 hover:scale-110">
+                <i class="fas fa-play text-black text-2xl"></i>
+              </div>
+            </div>
+            <div class="absolute top-2 right-2 bg-black bg-opacity-70 text-yellow-500 px-2 py-1 rounded text-xs font-bold">
+              ${movie.rating} <i class="fas fa-star text-yellow-500 ml-1"></i>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-lg font-bold text-white truncate">${movie.title}</h3>
+              <span class="text-gray-400 text-sm">${movie.duration}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-yellow-500 text-sm font-medium">${movie.episode}</span>
+              <button class="text-gray-400 hover:text-yellow-500 transition duration-300">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      movieCard.addEventListener('click', () => {
+        const url = `player.html?title=${encodeURIComponent(movie.title)}&video=${encodeURIComponent(movie.video)}&index=${index}`;
+        window.location.href = url;
+      });
+      
+      container.appendChild(movieCard);
+    });
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        // Here you would typically filter the content
+        // For this example, we're just toggling the active state
+      });
+    });
+
+    // Mobile menu toggle would go here
+    // Search functionality would go here
+  </script>
 </body>
 </html>
